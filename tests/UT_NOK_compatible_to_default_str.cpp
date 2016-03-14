@@ -27,7 +27,7 @@ void f_copy_with_default_str(Args&& ...args)
 BOOST_AUTO_TEST_CASE(incompatible_default_int)
 {
     f_copy_with_default_str(
-            "a"_na=42 // not compatible
+            "a"_na=42, // not compatible
             "b"_na="toto"
             );
 }
