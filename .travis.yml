@@ -2,48 +2,10 @@ sudo: required
 #dist: presice
 language: cpp
 env:
-    - COMPILER="g++-4.8"
     - COMPILER="g++-4.9"
     - COMPILER="g++-5"
     - COMPILER="clang++-3.6"
     - COMPILER="clang++-3.7"
-#matrix:
-#    include:
-#        - compiler: gcc
-#          addons:
-#              apt:
-#                  sources:
-#                      - ubuntu-toolchain-r-test
-#                  packages:
-#                      - g++-4.9
-#          env: COMPILER=g++-4.9
-#        - compiler: gcc
-#          addons:
-#              apt:
-#                  sources:
-#                      - ubuntu-toolchain-r-test
-#                  packages:
-#                      - g++-5.0
-#          env: COMPILER=g++-5.0
-#        - compiler: clang
-#          addons:
-#              apt:
-#                  sources:
-#                      - ubuntu-toolchain-r-test
-#                      - llvm-toolchain-precise-3.6
-#                  packages:
-#                      - clang-3.6
-#          env: COMPILER=clang++-3.6
-#        - compiler: clang
-#          addons:
-#              apt:
-#                  sources:
-#                      - ubuntu-toolchain-r-test
-#                      - llvm-toolchain-precise-3.7
-#                  packages:
-#                      - clang-3.7
-#          env: COMPILER=clang++-3.7
-
 #addons:
 #    apt:
 #        packages:
@@ -63,4 +25,4 @@ before_script:
 script:
     - mkdir build
     - cd build
-    - cmake -DCMAKE_CXX_COMPILER=$COMPILER .. && make && ctest
+    - cmake -DCMAKE_CXX_COMPILER=$COMPILER .. && make && ctest -VV
