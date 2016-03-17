@@ -1,4 +1,4 @@
-# Named parameters for C++14
+# Named parameters for C++14 [![Build Status](https://secure.travis-ci.org/LucHermitte/NamedParameter.png?branch=master)]
 
 Here is another proof of concept to implement
 [named parameters](https://en.wikipedia.org/wiki/Named_parameter) in C++.
@@ -6,6 +6,7 @@ Here is another proof of concept to implement
 __Discl.:__ This experiment requires C++14 and support of
 [n3599](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3599.html)
 (gcc and clang support this as a non standard extension).
+[Tests are passing with g++5.0+ and clang 3.6+](https://travis-ci.org/LucHermitte/NamedParameter).
 
 In a few words, this header only library permits to write:
 
@@ -61,7 +62,8 @@ assert(i==2);
   - Moved stuff
   - Default values
 - Errors are detected at compile time
-  - Multiple instantiations of a same parameter
+  - Multiple instantiations of a same parameter (the current implementation
+    does not detect this error with g++ 4.9)
   - Missing mandatory parameters
   - Default values not compatible with parameters
 - As close to C++11 as possible
@@ -108,7 +110,7 @@ auto const nonmutablecopy  = na::get(....);
 auto    && ref_or_constref = ... // see literature on perfect forwarding
 ```
 
-NB: it's is not necessary to extract all parameters passed.
+NB: it's not necessary to extract all the parameters passed.
 
 ### Fetching parameters
 This operation is done through a recursive analysis of the parameter types
@@ -123,7 +125,7 @@ one function in order to simplify user code.
 
 Unlike usual C++ code, the default value cannot be declared in function
 prototypes, it has to be declared in function definitions where local values
-are binded to the arguments. I choose to reused the `"argument"_na = value`
+are bound to the arguments. I choose to reuse the `"argument"_na = value`
 syntax (and thus the proxy object). This way, we can know a compile time
 whether an argument in mandatory or not, and thus generate compile time errors
 on misuses.
@@ -149,7 +151,7 @@ The library currently detects:
 According you're working in C++14 and with a compiler that provides the
 required compiler-extension.
 
-This library can be used with all functions. This means all functions would
+This library can be used with any function. This means all functions would
 become template functions. This is not something we wish to systematized as
 it'll make all functions inline.
 
@@ -157,14 +159,14 @@ The best is to reserve it to functions that are already template and that have
 many parameters we don't wish to mix up.
 
 Or also to constructors.  Named parameters are a neat alternative to setters.
-It's easy to forget to call a setter: the compiler will never tell us about.
+It's easy to forget to call a setter: the compiler will never tell us about it.
 With named parameters, we cannot mix up arguments and parameters nor forget to
 set them to pertinent values.
 
 ## Running the tests
 
 Unit tests are provided in the `test/` directory. They require boost and
-CMake+Ctest.
+CMake+CTest.
 
 In order to execute them, you'll have to run from your console:
 
