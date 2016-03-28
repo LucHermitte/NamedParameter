@@ -6,7 +6,7 @@ Here is another proof of concept to implement
 __Discl.:__ This experiment requires C++14 and support of
 [n3599](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3599.html)
 (gcc and clang support this as a non standard extension).
-[Tests are passing with g++5.0+ and clang 3.6+](https://travis-ci.org/LucHermitte/NamedParameter).
+[Tests are passing with g++4.9+ and clang 3.6+](https://travis-ci.org/LucHermitte/NamedParameter).
 
 In a few words, this header only library permits to write:
 
@@ -62,8 +62,7 @@ assert(i==2);
   - Moved stuff
   - Default values
 - Errors are detected at compile time
-  - Multiple instantiations of a same parameter (the current implementation
-    does not detect this error with g++ 4.9)
+  - Multiple instantiations of a same parameter
   - Missing mandatory parameters
   - Default values not compatible with parameters
 - As close to C++11 as possible
