@@ -1,5 +1,5 @@
-/**@file	named-parameters.hpp
- * @author	Luc Hermitte <EMAIL:luc{dot}hermitte{at}gmail{dot}com>
+/**@file        named-parameters.hpp
+ * @author      Luc Hermitte <EMAIL:luc{dot}hermitte{at}gmail{dot}com>
  *
  * Distributed under the Boost Software License, Version 1.0.
  * See accompanying file LICENSE_1_0.txt or copy at
@@ -92,8 +92,20 @@ namespace na
 
     namespace internals
     {
-        /// C++17 void_t
+#if 0
+        /// C++17 \c void_t
         template <typename ...> using void_t = void;
+#else
+        /** C++17 \c void_t.
+         * Implemented with a hack: Until CWG 1558 (a C++14 defect),
+         * unused parameters in alias templates were not guaranteed to
+         * ensure SFINAE and could be ignored, so earlier compilers
+         * require a more complex definition of void_t, such as:
+         * @see http://en.cppreference.com/w/cpp/types/void_t
+         */
+        template<typename... Ts> struct make_void { typedef void type;};
+        template<typename... Ts> using void_t = typename make_void<Ts...>::type;
+#endif
         /**@name boost::hana::has_common
          * @copyright Louis Dionne 2013-2016
          * Distributed under the Boost Software License, Version 1.0.
