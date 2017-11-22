@@ -8,7 +8,7 @@ __Discl.:__ This experiment requires C++14 and support of
 (gcc and clang support this as a non standard extension).
 [Tests are passing with g++4.9+ and clang 3.6+](https://travis-ci.org/LucHermitte/NamedParameter).
 
-In a few words, this header only library permits to write:
+In a few words, this header only-library permits to write:
 
 ```c++
 // service
@@ -77,12 +77,12 @@ This way, the variadic and generic list of parameters can be analysed at
 compile time.
 
 In order to define those types, we could ask the end-user to explicitly define
-one type for each possible parameters for all the functions were he wants named
+one type for each possible parameter for all the functions were s/he wants named
 parameters. While it's a good exercise to play with variadic template, this
 solution is not acceptable for the end-user.
 
 Some libraries use macros to define those types on-the-fly. I went for C++11
-user-define literals. Well. Not exactly. The standard permits to have the
+user-defined literals. Well. Not exactly. The standard permits to have the
 literal either cooked for us, or still in their raw form. In order to define a
 type that can be used with templates, the raw form is necessary.
 Unfortunately, the standard does not offer raw literals on string. This is a
@@ -125,8 +125,8 @@ one function in order to simplify user code.
 Unlike usual C++ code, the default value cannot be declared in function
 prototypes, it has to be declared in function definitions where local values
 are bound to the arguments. I choose to reuse the `"argument"_na = value`
-syntax (and thus the proxy object). This way, we can know a compile time
-whether an argument in mandatory or not, and thus generate compile time errors
+syntax (and thus the proxy object). This way, we can know at compile time
+whether an argument is mandatory or not, and thus we can generate compile time errors
 on misuses.
 
 
@@ -138,11 +138,11 @@ as possible:
   the error only when the function is actually called.  This have been used for
   missing mandatory parameters
 - tags dispatching has been used to call the right function depending on
-  whether the first parameters in the one searched or not.
+  whether the first parameter is the one searched or not.
 
 The library currently detects:
-- a missing mandatory parameter
-- a returned parameter not compatible with the default value provided
+- a missing mandatory parameter,
+- a returned parameter not compatible with the default value provided,
 - a same parameter kind used multiple times in a same function call.
 
 ## When to use this library
@@ -151,7 +151,7 @@ According you're working in C++14 and with a compiler that provides the
 required compiler-extension.
 
 This library can be used with any function. This means all functions would
-become template functions. This is not something we wish to systematized as
+become template functions. This is not something we wish to systematize as
 it'll make all functions inline.
 
 The best is to reserve it to functions that are already template and that have
@@ -179,11 +179,11 @@ CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release path/to/project/root && make && cte
 
 ## TO DO
 
-- permit to force the result type in get<>
+- permit to force the result type in `get<>`
 - compare assembler to the equivalent code
 - check with lambdas, static arrays, function pointers, ...
 - positional parameters for the unnamed parameters
-- add some constexpr?
+- add some `constexpr`?
 - doxygen
 
 ## See also
@@ -199,4 +199,4 @@ CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release path/to/project/root && make && cte
 
 ## Copyright
 
-(c) 2016, Luc Hermitte, Boost Sofware License
+(c) 2016-2017, Luc Hermitte, Boost Sofware License
